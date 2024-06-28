@@ -1,0 +1,9 @@
+.display__list {
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin: 0 auto;
+}
+
+/*# sourceMappingURL=display.css.map */

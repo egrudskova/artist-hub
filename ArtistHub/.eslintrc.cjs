@@ -13,7 +13,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
+    project: ['./tsconfig.app.json', './tsconfig.node.json'],
     tsconfigRootDir: __dirname,
   },
   plugins: ['@typescript-eslint', 'react-refresh', 'react-compiler'],
@@ -27,6 +27,7 @@ module.exports = {
     '@typescript-eslint/no-shadow': 'error',
     '@typescript-eslint/explicit-function-return-type': ['error', { 'allowExpressions': true }],
     '@typescript-eslint/no-explicit-any': 'error',
-    'prettier/prettier': ['error', { endOfLine: 'auto' }]
+    'prettier/prettier': ['error', { endOfLine: 'auto' }],
+    '@typescript-eslint/no-non-null-assertion': 'off'
   },
 }

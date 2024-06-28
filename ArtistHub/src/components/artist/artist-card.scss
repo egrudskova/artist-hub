@@ -1,0 +1,33 @@
+.card {
+  width: 280px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: linear-gradient(rgba(255, 255, 255, 0.90), rgba(207, 191, 179, 0.95));
+  color: rgb(96, 87, 81);
+}
+
+.card__inner {
+  padding: 15px;
+}
+
+.card__header {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.card__image {
+  order: -1;
+}
+
+.card__link {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.card__description {
+  word-wrap: break-word;
+  max-width: 100%;
+  font-size: 16px;
+  line-height: 19px;
+}
