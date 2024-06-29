@@ -9,7 +9,8 @@ interface DisplayProps {
 export default class Display extends React.Component<DisplayProps> {
   render(): React.JSX.Element {
     return (
-      <div className="display">
+      <section className="display">
+        <h2 className="display__heading visually-hidden">Search results</h2>
         <ul className="display__list">
           {this.props.artists.map((artist: ArtistProps) => (
             <ArtistCard
@@ -21,7 +22,7 @@ export default class Display extends React.Component<DisplayProps> {
             ></ArtistCard>
           ))}
         </ul>
-      </div>
+      </section>
     );
   }
 }

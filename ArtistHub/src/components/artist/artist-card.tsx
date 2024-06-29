@@ -14,7 +14,7 @@ export default class ArtistCard extends React.Component<ArtistProps> {
       <li className="card">
         <a href={this.props.url} className="card__link">
           <div className="card__inner">
-            <h2 className="card__header">{this.props.name}</h2>
+            <h3 className="card__header">{this.props.name}</h3>
             <p className="card__description">{this.props.description}</p>
           </div>
           <img src={this.props.image ?? '#'} alt="Artist photo" className="card__image" />

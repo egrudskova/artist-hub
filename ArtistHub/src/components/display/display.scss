@@ -1,7 +1,11 @@
 .display__list {
-  width: 90%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 280px));
+  grid-auto-flow: row;
+  column-gap: 40px;
+  row-gap: 40px;
+  width: fit-content;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }

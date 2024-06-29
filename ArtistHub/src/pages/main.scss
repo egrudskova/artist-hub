@@ -1,0 +1,19 @@
+.header {
+  background-color: #323232;
+  padding: 25px 50px;
+  display: grid;
+  grid-template-columns: 1fr repeat(1, auto) 1fr;
+  grid-column-gap: 20px;
+  justify-items: center;
+}
+
+.header__link {
+  grid-column-start: 2
+}
+.header__link svg {
+  width: 150px;
+  height: 39px;
+}
+.main {
+  padding: 100px 50px
+}
