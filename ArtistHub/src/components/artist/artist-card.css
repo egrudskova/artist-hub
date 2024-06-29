@@ -2,8 +2,9 @@
   width: 280px;
   border-radius: 10px;
   overflow: hidden;
-  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(207, 191, 179, 0.95));
-  color: rgb(96, 87, 81);
+  background: #C7BABB;
+  color: #4A0F14;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 .card__inner {
@@ -13,10 +14,14 @@
 .card__header {
   font-size: 24px;
   margin-bottom: 10px;
+  font-weight: 700;
 }
 
 .card__image {
   order: -1;
+  width: 280px;
+  height: 280px;
+  object-fit: cover;
 }
 
 .card__link {
