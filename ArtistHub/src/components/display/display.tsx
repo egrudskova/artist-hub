@@ -1,9 +1,9 @@
 import React from 'react';
 import './display.css';
-import ArtistCard, { ArtistProps } from '../artist/artist-card.tsx';
+import Card, { CardProps } from '../card/card.tsx';
 
 interface DisplayProps {
-  artists: ArtistProps[];
+  cards: CardProps[];
 }
 
 export default class Display extends React.Component<DisplayProps> {
@@ -12,14 +12,14 @@ export default class Display extends React.Component<DisplayProps> {
       <section className="display">
         <h2 className="display__heading visually-hidden">Search results</h2>
         <ul className="display__list">
-          {this.props.artists.map((artist: ArtistProps) => (
-            <ArtistCard
+          {this.props.cards.map((card: CardProps) => (
+            <Card
               key={Math.random()}
-              name={artist.name}
-              description={artist.description}
-              image={artist.image}
-              url={artist.url}
-            ></ArtistCard>
+              name={card.name}
+              description={card.description}
+              image={card.image}
+              url={card.url}
+            ></Card>
           ))}
         </ul>
       </section>

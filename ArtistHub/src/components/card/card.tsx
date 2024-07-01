@@ -1,14 +1,14 @@
-import './artist-card.css';
+import './card.css';
 import React from 'react';
 
-export interface ArtistProps {
+export interface CardProps {
   name: string;
   description: string;
   image?: string;
   url: string;
 }
 
-export default class ArtistCard extends React.Component<ArtistProps> {
+export default class Card extends React.Component<CardProps> {
   render(): React.JSX.Element {
     return (
       <li className="card">

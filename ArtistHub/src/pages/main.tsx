@@ -3,17 +3,17 @@ import React from 'react';
 import Search from '../components/search/search.tsx';
 import Display from '../components/display/display.tsx';
 import { getRandomInt } from '../utils.ts';
-import { ArtistProps } from '../components/artist/artist-card.tsx';
+import { CardProps } from '../components/artist/card.tsx';
 import Logo from '../assets/images/logo.svg?react';
 
-const createMockArtist = (): ArtistProps => ({
+const createMockArtist = (): CardProps => ({
   name: 'Artist name',
   description: 'Lorem ipsum'.repeat(getRandomInt(1, 5)),
   image: `https://loremflickr.com/248/152?random=${getRandomInt(1, 100).toString()}`,
   url: '#',
 });
 
-const mockData: ArtistProps[] = [];
+const mockData: CardProps[] = [];
 for (let i = 0; i < getRandomInt(5, 20); i++) {
   mockData.push(createMockArtist());
 }
@@ -30,7 +30,7 @@ export default class MainPage extends React.Component {
         </header>
         <main className="main">
           <h1 className="main__heading visually-hidden">Main page</h1>
-          <Display artists={mockData}></Display>
+          <Display cards={mockData}></Display>
         </main>
       </>
     );
