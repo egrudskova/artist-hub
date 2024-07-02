@@ -1,7 +1,14 @@
 import React from 'react';
 import './search.css';
 import { buildApiRequest } from '../../utils.ts';
-import { APIMethods, APIMethodsCategories, APIResponseType, InputChangeHandler } from '../../types.ts';
+import {
+  APIMethods,
+  APIMethodsCategories,
+  APIRequestOptionalParams,
+  APIRequestRequiredParams,
+  APIResponseType,
+  InputChangeHandler,
+} from '../../types.ts';
 
 export default class Search extends React.Component {
   state = {
@@ -11,6 +18,7 @@ export default class Search extends React.Component {
   };
 
   componentDidMount(): void {
+    void this.fetchSearchData(...this.prepareFetchParams());
     const LSInput: string = localStorage.getItem('input') ?? '';
     this.setState({ input: LSInput });
   }
@@ -19,16 +27,31 @@ export default class Search extends React.Component {
     this.setState({ input: evt.target.value });
   };
 
-  fetchSearchData = async (input: string, category: APIMethodsCategories): Promise<void> => {
-    const response = await fetch(
-      buildApiRequest({
-        userInput: input,
-        APIMethodCategory: category,
+  prepareFetchParams = (input?: string): [APIRequestRequiredParams, APIRequestOptionalParams] => {
+    let required: APIRequestRequiredParams;
+    let optional: APIRequestOptionalParams = {};
+    if (input) {
+      required = {
+        APIMethodCategory: this.state.category,
         APIMethod: APIMethods.Search,
-      })
-    );
+      };
+      optional = { [this.state.category]: this.state.input };
+    } else {
+      required = {
+        APIMethodCategory: APIMethodsCategories.Chart,
+        APIMethod: APIMethods.GetTopTracks,
+      };
+    }
+    return [required, optional];
+  };
+
+  fetchSearchData = async (
+    requiredParams: APIRequestRequiredParams,
+    optionalParams: APIRequestOptionalParams
+  ): Promise<void> => {
+    const response = await fetch(buildApiRequest(requiredParams, optionalParams));
     const json: APIResponseType = (await response.json()) as APIResponseType;
-    this.setState({ result: json.results[`${category}matches`] });
+    this.setState({ result: json });
   };
 
   render(): React.JSX.Element {
@@ -47,7 +70,7 @@ export default class Search extends React.Component {
         <button
           className="search__button"
           onClick={() => {
-            void this.fetchSearchData(this.state.input, this.state.category);
+            void this.fetchSearchData(...this.prepareFetchParams(this.state.input));
             localStorage.setItem('input', this.state.input);
           }}
         ></button>

@@ -1,15 +1,17 @@
-import { APIRequestParams, APIResponseFormats } from './types.ts';
+import { APIRequestOptionalParams, APIRequestRequiredParams, APIResponseFormats } from './types.ts';
 
 export const getRandomInt = (min: number, max: number): number => Math.round(Math.random() * (max - min) + min);
 
-export const buildApiRequest = ({
-  userInput = '',
-  APIMethod,
-  APIMethodCategory,
-  APIResponseFormat = APIResponseFormats.JSON,
-  APIResponseLimit = 30,
-  APIResponsePage = 1,
-}: APIRequestParams): string => {
+export const buildApiRequest = (
+  {
+    APIMethod,
+    APIMethodCategory,
+    APIResponseFormat = APIResponseFormats.JSON,
+    APIResponseLimit = 30,
+    APIResponsePage = 1,
+  }: APIRequestRequiredParams,
+  optionalParams: APIRequestOptionalParams
+): string => {
   const baseUrl = typeof import.meta.env.VITE_API_URL === 'string' ? import.meta.env.VITE_API_URL : undefined;
 
   if (typeof baseUrl !== 'string') {
@@ -24,11 +26,11 @@ export const buildApiRequest = ({
 
   const queryParams: URLSearchParams = new URLSearchParams({
     method: `${APIMethodCategory}.${APIMethod}`,
-    [APIMethodCategory]: userInput,
     api_key: APIKey,
     format: APIResponseFormat,
     limit: APIResponseLimit.toString(),
     page: APIResponsePage.toString(),
+    ...optionalParams,
   });
   return `${baseUrl}?${queryParams.toString()}`;
 };

@@ -1,11 +1,13 @@
 export enum APIMethods {
   Search = 'search',
+  GetTopTracks = 'getTopTracks',
 }
 
 export enum APIMethodsCategories {
   Artist = 'artist',
   Track = 'track',
   User = 'user',
+  Chart = 'chart',
 }
 
 export enum APIResponseFormats {
@@ -13,14 +15,15 @@ export enum APIResponseFormats {
   XML = '',
 }
 
-export interface APIRequestParams {
-  userInput: string;
+export interface APIRequestRequiredParams {
   APIMethodCategory: APIMethodsCategories;
   APIMethod: APIMethods;
   APIResponseFormat?: APIResponseFormats;
   APIResponseLimit?: number;
   APIResponsePage?: number;
 }
+
+export type APIRequestOptionalParams = Record<string, string> | Record<string, never>;
 
 interface Track {
   name: string;
