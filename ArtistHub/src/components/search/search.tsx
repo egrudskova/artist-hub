@@ -5,24 +5,30 @@ import { APIMethods, APIMethodsCategories, APIResponseType, InputChangeHandler }
 
 export default class Search extends React.Component {
   state = {
+    category: APIMethodsCategories.Track,
     result: [],
     input: '',
   };
+
+  componentDidMount(): void {
+    const LSInput: string = localStorage.getItem('input') ?? '';
+    this.setState({ input: LSInput });
+  }
 
   handleInputChange = (evt: InputChangeHandler): void => {
     this.setState({ input: evt.target.value });
   };
 
-  fetchSearchData = async (input: string): Promise<void> => {
+  fetchSearchData = async (input: string, category: APIMethodsCategories): Promise<void> => {
     const response = await fetch(
       buildApiRequest({
         userInput: input,
-        APIMethodCategory: APIMethodsCategories.Track,
+        APIMethodCategory: category,
         APIMethod: APIMethods.Search,
       })
     );
     const json: APIResponseType = (await response.json()) as APIResponseType;
-    this.setState({ result: json.results[`${APIMethodsCategories.Track}matches`] });
+    this.setState({ result: json.results[`${category}matches`] });
   };
 
   render(): React.JSX.Element {
@@ -41,7 +47,8 @@ export default class Search extends React.Component {
         <button
           className="search__button"
           onClick={() => {
-            void this.fetchSearchData(this.state.input);
+            void this.fetchSearchData(this.state.input, this.state.category);
+            localStorage.setItem('input', this.state.input);
           }}
         ></button>
       </section>
