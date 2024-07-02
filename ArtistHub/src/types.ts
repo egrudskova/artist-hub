@@ -43,3 +43,7 @@ interface ResultsType {
 export interface APIResponseType {
   results: ResultsType;
 }
+
+export interface InputChangeHandler {
+  target: HTMLInputElement;
+}
