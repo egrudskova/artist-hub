@@ -6,14 +6,18 @@ import {
   APIMethodsCategories,
   APIRequestOptionalParams,
   APIRequestRequiredParams,
-  APIResponseType,
+  APIResponse,
   InputChangeHandler,
+  Track,
 } from '../../types.ts';
 
-export default class Search extends React.Component {
+interface SearchProps {
+  onSearchDataChange: (data: Track[] | []) => void;
+}
+
+export default class Search extends React.Component<SearchProps> {
   state = {
     category: APIMethodsCategories.Track,
-    result: [],
     input: '',
   };
 
@@ -50,8 +54,8 @@ export default class Search extends React.Component {
     optionalParams: APIRequestOptionalParams
   ): Promise<void> => {
     const response = await fetch(buildApiRequest(requiredParams, optionalParams));
-    const json: APIResponseType = (await response.json()) as APIResponseType;
-    this.setState({ result: json });
+    const json: APIResponse = (await response.json()) as APIResponse;
+    this.props.onSearchDataChange(json.results?.trackmatches?.track ?? json.tracks?.track ?? []);
   };
 
   render(): React.JSX.Element {

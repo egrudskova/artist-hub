@@ -25,7 +25,7 @@ export interface APIRequestRequiredParams {
 
 export type APIRequestOptionalParams = Record<string, string> | Record<string, never>;
 
-interface Track {
+export interface Track {
   name: string;
   artist: string;
   url: string;
@@ -38,13 +38,14 @@ interface Track {
   mbid: string;
 }
 
-interface ResultsType {
+interface Results {
   [key: string]: unknown;
   trackmatches?: { track: Track[] };
 }
 
-export interface APIResponseType {
-  results: ResultsType;
+export interface APIResponse {
+  results?: Results;
+  tracks?: { track: Track[] };
 }
 
 export interface InputChangeHandler {

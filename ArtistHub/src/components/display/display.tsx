@@ -16,9 +16,10 @@ export default class Display extends React.Component<DisplayProps> {
             <Card
               key={Math.random()}
               name={card.name}
-              description={card.description}
+              listeners={card.listeners}
               image={card.image}
               url={card.url}
+              artist={card.artist}
             ></Card>
           ))}
         </ul>
