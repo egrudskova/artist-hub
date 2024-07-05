@@ -1,4 +1,3 @@
-import './app.css';
 import React from 'react';
 import MainPage from '../../pages/main.tsx';
 import ErrorBoundary from '../error/error-boundary.tsx';

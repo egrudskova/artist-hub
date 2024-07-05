@@ -6,11 +6,9 @@
   grid-column-gap: 20px;
   justify-items: center;
 }
-
 .header__link {
   grid-column-start: 2;
 }
-
 .header__link svg {
   width: 150px;
   height: 39px;
