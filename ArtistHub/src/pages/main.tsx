@@ -3,7 +3,7 @@ import React from 'react';
 import Search from '../components/search/search.tsx';
 import Display from '../components/display/display.tsx';
 import Logo from '../assets/images/logo.svg?react';
-import { Track } from '../types.ts';
+import { Track } from '../services/types.ts';
 import ErrorButton from '../components/error/error-button.tsx';
 
 export default class MainPage extends React.Component {

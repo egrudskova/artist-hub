@@ -4,15 +4,12 @@ export enum APIMethods {
 }
 
 export enum APIMethodsCategories {
-  Artist = 'artist',
   Track = 'track',
-  User = 'user',
   Chart = 'chart',
 }
 
 export enum APIResponseFormats {
   JSON = 'json',
-  XML = '',
 }
 
 export interface APIRequestRequiredParams {
