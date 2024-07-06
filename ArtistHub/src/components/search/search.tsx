@@ -5,6 +5,7 @@ import LastFM from '../../services/LastFM.ts';
 
 interface SearchProps {
   onSearchDataChange: (data: Track[] | []) => void;
+  onLoadingStatusChange: (isLoading: boolean) => void;
 }
 
 export default class Search extends React.Component<SearchProps> {
@@ -16,7 +17,10 @@ export default class Search extends React.Component<SearchProps> {
   private lastFm = new LastFM();
 
   componentDidMount(): void {
-    void this.lastFm.fetchSearchData(this.props.onSearchDataChange, this.state.category);
+    this.props.onLoadingStatusChange(true);
+    void this.lastFm.fetchSearchData(this.props.onSearchDataChange, this.state.category).then(() => {
+      this.props.onLoadingStatusChange(false);
+    });
     const LSInput: string = localStorage.getItem('input') ?? '';
     this.setState({ input: LSInput });
   }
@@ -41,7 +45,12 @@ export default class Search extends React.Component<SearchProps> {
         <button
           className="search__button"
           onClick={() => {
-            void this.lastFm.fetchSearchData(this.props.onSearchDataChange, this.state.category, this.state.input);
+            this.props.onLoadingStatusChange(true);
+            void this.lastFm
+              .fetchSearchData(this.props.onSearchDataChange, this.state.category, this.state.input)
+              .then(() => {
+                this.props.onLoadingStatusChange(false);
+              });
             localStorage.setItem('input', this.state.input);
           }}
         ></button>
