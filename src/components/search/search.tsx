@@ -18,11 +18,14 @@ export default class Search extends React.Component<SearchProps> {
 
   componentDidMount(): void {
     this.props.onLoadingStatusChange(true);
-    void this.lastFm.fetchSearchData(this.props.onSearchDataChange, this.state.category).then(() => {
-      this.props.onLoadingStatusChange(false);
-    });
     const LSInput: string = localStorage.getItem('input') ?? '';
-    this.setState({ input: LSInput });
+    this.setState({ input: LSInput }, () => {
+      void this.lastFm
+        .fetchSearchData(this.props.onSearchDataChange, this.state.category, this.state.input)
+        .then(() => {
+          this.props.onLoadingStatusChange(false);
+        });
+    });
   }
 
   handleInputChange = (evt: InputChangeHandler): void => {
