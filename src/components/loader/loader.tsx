@@ -5,8 +5,8 @@ interface LoaderProps {
   isLoading: boolean;
 }
 
-export default class Loader extends React.Component<LoaderProps> {
-  render(): React.JSX.Element {
-    return this.props.isLoading ? <div className={'loader'}></div> : <></>;
-  }
-}
+const Loader = ({ isLoading }: LoaderProps): React.JSX.Element => {
+  return isLoading ? <div className={'loader'}></div> : <></>;
+};
+
+export default Loader;
