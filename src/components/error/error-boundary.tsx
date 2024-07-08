@@ -1,3 +1,4 @@
+import './error-boundary.css';
 import React, { ErrorInfo } from 'react';
 
 interface ErrorProps {
