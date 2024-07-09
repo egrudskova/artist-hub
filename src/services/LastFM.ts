@@ -20,15 +20,10 @@ export default class LastFM {
     optionalParams: APIRequestOptionalParams
   ): string => {
     const baseUrl = typeof import.meta.env.VITE_API_URL === 'string' ? import.meta.env.VITE_API_URL : undefined;
-
-    if (typeof baseUrl !== 'string') {
-      throw new Error('API_URL is not provided.');
-    }
-
     const APIKey = typeof import.meta.env.VITE_API_KEY === 'string' ? import.meta.env.VITE_API_KEY : undefined;
 
-    if (typeof APIKey !== 'string') {
-      throw new Error('API_KEY is not provided.');
+    if (typeof baseUrl !== 'string' || typeof APIKey !== 'string') {
+      throw new Error('API_URL/API_KEY is not provided.');
     }
 
     const queryParams: URLSearchParams = new URLSearchParams({
@@ -64,13 +59,9 @@ export default class LastFM {
     return [required, optional];
   };
 
-  fetchSearchData = async (
-    listener: (data: Track[] | []) => void,
-    category: APIMethodsCategories,
-    input?: string
-  ): Promise<void> => {
+  fetchSearchData = async (category: APIMethodsCategories, input?: string): Promise<Track[]> => {
     const response = await fetch(this.buildApiRequest(...this.prepareFetchParams(category, input)));
     const json: APIResponse = (await response.json()) as APIResponse;
-    listener(json.results?.trackmatches?.track ?? json.tracks?.track ?? []);
+    return json.results?.trackmatches?.track ?? json.tracks?.track ?? [];
   };
 }

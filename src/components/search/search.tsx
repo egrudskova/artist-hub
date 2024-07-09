@@ -1,63 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './search.css';
-import { APIMethodsCategories, InputChangeHandler, Track } from '../../services/types.ts';
-import LastFM from '../../services/LastFM.ts';
+import { InputChangeHandler } from '../../services/types.ts';
 
 interface SearchProps {
-  onSearchDataChange: (data: Track[] | []) => void;
-  onLoadingStatusChange: (isLoading: boolean) => void;
+  handleSearchRequestChange: (request: string) => void;
 }
 
-export default class Search extends React.Component<SearchProps> {
-  state = {
-    category: APIMethodsCategories.Track,
-    input: '',
+const Search = ({ handleSearchRequestChange }: SearchProps): React.JSX.Element => {
+  const [input, setInput] = useState('');
+
+  const handleInputChange = (evt: InputChangeHandler): void => {
+    setInput(evt.target.value);
   };
 
-  private lastFm = new LastFM();
+  return (
+    <section className="search">
+      <label htmlFor="search" className="visually-hidden">
+        Search the artist:
+      </label>
+      <input id="search" type="search" value={input} onChange={handleInputChange} className="search__input" />
+      <button
+        className="search__button"
+        onClick={() => {
+          handleSearchRequestChange(input);
+        }}
+      ></button>
+    </section>
+  );
+};
 
-  componentDidMount(): void {
-    this.props.onLoadingStatusChange(true);
-    const LSInput: string = localStorage.getItem('input') ?? '';
-    this.setState({ input: LSInput }, () => {
-      void this.lastFm
-        .fetchSearchData(this.props.onSearchDataChange, this.state.category, this.state.input)
-        .then(() => {
-          this.props.onLoadingStatusChange(false);
-        });
-    });
-  }
-
-  handleInputChange = (evt: InputChangeHandler): void => {
-    this.setState({ input: evt.target.value });
-  };
-
-  render(): React.JSX.Element {
-    return (
-      <section className="search">
-        <label htmlFor="search" className="visually-hidden">
-          Search the artist:
-        </label>
-        <input
-          id="search"
-          type="search"
-          value={this.state.input}
-          onChange={this.handleInputChange}
-          className="search__input"
-        />
-        <button
-          className="search__button"
-          onClick={() => {
-            this.props.onLoadingStatusChange(true);
-            void this.lastFm
-              .fetchSearchData(this.props.onSearchDataChange, this.state.category, this.state.input)
-              .then(() => {
-                this.props.onLoadingStatusChange(false);
-              });
-            localStorage.setItem('input', this.state.input);
-          }}
-        ></button>
-      </section>
-    );
-  }
-}
+export default Search;
