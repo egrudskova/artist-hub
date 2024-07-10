@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './search.css';
 import { InputChangeHandler } from '../../services/types.ts';
+import { useLocalStorage } from '../../hooks/hooks.ts';
 
 interface SearchProps {
   handleSearchRequestChange: (request: string) => void;
 }
 
 const Search = ({ handleSearchRequestChange }: SearchProps): React.JSX.Element => {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useLocalStorage().input;
 
   const handleInputChange = (evt: InputChangeHandler): void => {
     setInput(evt.target.value);
@@ -23,6 +24,7 @@ const Search = ({ handleSearchRequestChange }: SearchProps): React.JSX.Element =
         className="search__button"
         onClick={() => {
           handleSearchRequestChange(input);
+          console.log(`search request will be changed to ${input}`);
         }}
       ></button>
     </section>

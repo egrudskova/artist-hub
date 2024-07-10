@@ -1,36 +1,16 @@
 import './main.css';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Search from '../components/search/search.tsx';
 import Display from '../components/display/display.tsx';
 import Logo from '../assets/images/logo.svg?react';
-import { APIMethodsCategories, Track } from '../services/types.ts';
+import { APIMethodsCategories } from '../services/types.ts';
 import ErrorButton from '../components/error/error-button.tsx';
 import Loader from '../components/loader/loader.tsx';
-import LastFM from '../services/LastFM.ts';
-
-const lastFM = new LastFM();
-
-const useLastFMLoader = (category: APIMethodsCategories, request: string): [Track[] | [], boolean] => {
-  const [data, setData] = useState<Track[] | []>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  useEffect(() => {
-    setIsLoading(true);
-    void lastFM
-      .fetchSearchData(category, request)
-      .then((searchData) => {
-        setData(searchData);
-      })
-      .then(() => {
-        setIsLoading(false);
-      });
-  }, [category, request]);
-
-  return [data, isLoading];
-};
+import { useLastFMLoader, useLocalStorage } from '../hooks/hooks.ts';
 
 const MainPage = (): React.JSX.Element => {
   const [category] = useState(APIMethodsCategories.Track);
-  const [searchRequest, setSearchRequest] = useState('');
+  const [searchRequest, setSearchRequest] = useLocalStorage().request;
   const [searchData, isLoading] = useLastFMLoader(category, searchRequest);
 
   const handleSearchRequestChange = (request: string): void => {
