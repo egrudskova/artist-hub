@@ -1,0 +1,70 @@
+@font-face {
+    font-family: "Barlow";
+    font-style: normal;
+    font-weight: 500;
+    src: url("./assets/fonts/Barlow-Medium.ttf") format("ttf");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Barlow";
+    font-style: normal;
+    font-weight: 600;
+    src: url("./assets/fonts/Barlow-SemiBold.ttf") format("ttf");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Barlow";
+    font-style: normal;
+    font-weight: 700;
+    src: url("./assets/fonts/Barlow-Bold.ttf") format("ttf");
+    font-display: swap;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    font: inherit;
+}
+
+ol, ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+html, body, #root {
+    height: 100%;
+    background-color: #232323;
+    color: #FAFAFA;
+    font-family: 'Barlow', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+}
+
+.visually-hidden {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}

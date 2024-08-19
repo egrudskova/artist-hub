@@ -1,0 +1,2 @@
+echo 'Husky check has started...'
+npm run lint
